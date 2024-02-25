@@ -21,7 +21,7 @@ class ImageClassifier(nn.Module):
             nn.Conv2d(64, 64, (3, 3)),
             nn.ReLU(),
             nn.Flatten(),
-            nn.Linear(64*(28-6)*(28-6), 10),
+            nn.Linear(64 * (28 - 6) * (28 - 6), 10),
         )
 
     def forward(self, x):
@@ -32,7 +32,7 @@ def train():
     for epoch in range(10):
         for batch in dataset:
             X, y = batch
-            X, y = X.to('cpu'), y.to('cpu')
+            X, y = X.to("cpu"), y.to("cpu")
             yhat = clf(X)
             loss = loss_fn(yhat, y)
 
@@ -56,7 +56,7 @@ def guess(image: str):
     print(torch.argmax(clf(img_tensor)))
 
 
-clf = ImageClassifier().to('cpu')
+clf = ImageClassifier().to("cpu")
 opt = Adam(clf.parameters(), lr=1e-3)
 loss_fn = nn.CrossEntropyLoss()
 
@@ -66,10 +66,3 @@ if __name__ == "__main__":
 
     # Guessing part
     guess("img_1.jpg")
-
-
-
-
-
-
-
